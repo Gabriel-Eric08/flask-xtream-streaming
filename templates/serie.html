@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ serie['info']['name'] }} - HXTREAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header {
+            background-color: #1a1a1a;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e50914;
+        }
+        .accordion-button {
+            background-color: #1a1a1a;
+            color: white;
+            font-weight: bold;
+        }
+        .accordion-button:not(.collapsed) {
+            color: #e50914;
+            background-color: #1a1a1a;
+        }
+        .accordion-item {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+        }
+        .accordion-body {
+            background-color: #1e1e1e;
+        }
+        .episode-item {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        .episode-title {
+            font-weight: bold;
+            color: white;
+        }
+        .watch-btn {
+            float: right;
+            background-color: #e50914;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            color: white;
+        }
+        .watch-btn:hover {
+            background-color: #ff1f2c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><div class="logo">HXTREAM</div></div>
+                    <div class="col-md-6 text-end">
+                        <div class="time-date"><span id="current-time"></span> <span id="current-date"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-5">
+            <h2 class="mb-4">{{ serie['info']['name'] }}</h2>
+
+            <div class="accordion" id="seasonAccordion">
+                {% for season, episodes in serie['episodes'].items() %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{ loop.index }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+                                Temporada {{ season }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#seasonAccordion">
+                            <div class="accordion-body">
+                                {% for ep in episodes %}
+                                    <div class="episode-item d-flex justify-content-between align-items-center">
+                                        <span class="episode-title">Episódio {{ ep['episode_num'] }} - {{ ep['title'] }}</span>
+                                        <a class="watch-btn" href="{{ url_for('Player.play_episode', episode_id=ep['id'], episode_title=ep['title']) }}" target="_blank">Assistir</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Atualiza hora/data se quiser manter como na home
+        const timeElement = document.getElementById('current-time');
+        const dateElement = document.getElementById('current-date');
+        const updateTime = () => {
+            const now = new Date();
+            timeElement.innerText = now.toLocaleTimeString();
+            dateElement.innerText = now.toLocaleDateString();
+        };
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+
+</body>
+</html>

@@ -86,7 +86,7 @@
                         {% for category in categories_series %}
                             <div class="col-md-3 mb-4 category-card" data-name="{{ category['category_name']|lower }}">
                                 <div class="card bg-dark">
-                                    <a href="{{ url_for('Movies.movies', category_id=category['category_id']) }}">
+                                    <a href="{{ url_for('Series.series', category_id=category['category_id']) }}">
                                         <div class="card-body text-center">
                                             <h5 class="card-title">{{ category['category_name'] }}</h5>
                                         </div>

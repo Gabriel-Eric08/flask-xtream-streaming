@@ -65,7 +65,7 @@
         <div class="container">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="movies-tab" data-bs-toggle="tab" data-bs-target="#movies" type="button" role="tab" aria-controls="movies" aria-selected="true">MOVIES</button>
+                    <button class="nav-link active" id="movies-tab" data-bs-toggle="tab" data-bs-target="#movies" type="button" role="tab" aria-controls="movies" aria-selected="true">SERIES</button>
                 </li>
                 
             </ul>
@@ -84,17 +84,17 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active content-section" id="movies" role="tabpanel" aria-labelledby="movies-tab">
                     <div class="section-title">
-                        <span>MOVIES</span>
+                        <span>Series</span>
                     </div>
                     <div class="row" id="movies-container">
-                        {% for movie in movies %}
-                            <div class="col-md-3 mb-4 movie-card" data-name="{{ movie['name']|lower }}">
+                        {% for serie in series %}
+                            <div class="col-md-3 mb-4 series-card" data-name="{{ serie['name']|lower }}">
                                 <div class="card bg-dark">
-                                    <a href="{{ url_for('Player.home', id_filme=movie['stream_id'], movie_name=movie['name']) }}" target="_blank">
-                                        <img src="{{ movie['stream_icon'] }}" class="card-img-top" alt="{{ movie['name'] }}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+                                    <a href="{{ url_for('Serie.serie', series_id=serie['series_id']) }}" target="_blank">
+                                        <img src="{{ serie['cover'] }}" class="card-img-top" alt="{{ serie['name'] }}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
                                     </a>
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ movie['name'] }}</h5>
+                                        <h5 class="card-title">{{ serie['name'] }}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                 const activeTab = document.querySelector('.tab-pane.active');
                 
                 if (activeTab.id === 'movies') {
-                    filterItems('movies-container', 'movie-card', 'no-movies', searchTerm);
+                    filterItems('movies-container', 'series-card', 'no-movies', searchTerm);
                 } else if (activeTab.id === 'series') {
                     filterItems('series-container', 'series-card', 'no-series', searchTerm);
                 }

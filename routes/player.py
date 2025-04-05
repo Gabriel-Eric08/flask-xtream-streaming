@@ -22,3 +22,17 @@ def home(id_filme, movie_name):
 
 
     return render_template('player.html', movie_url=url_watch_movie, movie_name=movie_name1)
+
+
+@player_route.route('/serie/<episode_id>/<episode_title>')
+def play_episode(episode_id, episode_title):
+    creds = getCredentials()
+
+    server = creds.get("URL_Xtream")
+    user = creds.get("Username")
+    password = creds.get("Password")
+
+    
+    url_watch_episode = f"{server}/series/{user}/{password}/{episode_id}.mp4"
+
+    return render_template('player_serie.html', episode_url=url_watch_episode, episode_title=episode_title)

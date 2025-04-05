@@ -22,7 +22,7 @@ function setCredentials() {
         body: JSON.stringify(data)
     };
 
-    fetch('http://127.0.0.1:5000/auth/', options)
+    fetch('http://127.0.0.1:5000/', options)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro ${response.status}: ${response.statusText}`);
