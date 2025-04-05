@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie_name }} - Player</title>
+    <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .movie-container {
+            width: 90%;
+            max-width: 1000px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000;
+        }
+        
+        .video-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .play-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto 0;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff4500, #ff8c00);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(255, 69, 0, 0.3);
+        }
+        
+        .play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 69, 0, 0.4);
+        }
+        
+        .play-button:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .movie-container {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="movie-container">
+        <h1>{{ movie_name }}</h1>
+        
+        <div class="video-container">
+            <video id="video-player" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto">
+                <source src="{{ movie_url }}" type="video/mp4">
+                <p class="vjs-no-js">
+                    Para assistir este vídeo, por favor ative o JavaScript ou considere atualizar para um navegador que
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">suporte vídeo HTML5</a>
+                </p>
+            </video>
+        </div>
+        
+        <button class="play-button" onclick="playMovie()">▶ Assistir Agora</button>
+    </div>
+
+    <script>
+        // Inicializa o player Video.js
+        var player = videojs('video-player', {
+            controls: true,
+            autoplay: false,
+            preload: 'auto',
+            responsive: true,
+            fluid: true
+        });
+        
+        function playMovie() {
+            player.play();
+            
+            // Rola a página até o player
+            document.querySelector('.video-container').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

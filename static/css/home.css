@@ -1,0 +1,71 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.header {
+    background-color: #1a1a1a;
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e50914;
+}
+.time-date {
+    font-size: 14px;
+    color: #aaa;
+}
+.nav-tabs {
+    border-bottom: 1px solid #333;
+}
+.nav-tabs .nav-link {
+    color: #aaa;
+    border: none;
+    font-weight: bold;
+    padding: 15px 20px;
+}
+.nav-tabs .nav-link.active {
+    color: white;
+    background-color: transparent;
+    border-bottom: 3px solid #e50914;
+}
+.nav-tabs .nav-link:hover {
+    color: white;
+}
+.section-title {
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.last-updated {
+    font-size: 12px;
+    color: #777;
+}
+.content-section {
+    min-height: 300px;
+    padding: 20px 0;
+}
+.footer {
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+    border-top: 1px solid #333;
+}
+.account-info {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}
+.card-title {
+    color: white;
+}
+.ard-text text-muted {
+    color: white;
+}
